@@ -1,33 +1,30 @@
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.geom.RoundRectangle2D;
 import java.util.*;
 import java.util.List;
-import java.util.concurrent.Flow;
 
-public class GameFrame extends JFrame implements ActionListener {
+public class GameFrame extends JFrame {
 
-    JPanel GamePanel = new JPanel();
+
+    //FÖRSTÖRDE DENNA KLASS SÅ DETTA FUNKAR EJ LÄNGRE.........
+    JPanel gamePanel = new JPanel();
     JPanel notGamePanel = new JPanel();
     JButton startButton = new JButton("New game");
+    List<JButton> gameButtons = designedButtons();
 
     public GameFrame(){
         this.setLayout(new BorderLayout());
 
-        this.add(GamePanel, BorderLayout.CENTER);
+        this.add(gamePanel, BorderLayout.CENTER);
         this.add(notGamePanel, BorderLayout.AFTER_LAST_LINE);
-        GamePanel.setLayout(new GridLayout(4,4));
+        gamePanel.setLayout(new GridLayout(4,4));
+
         notGamePanel.setLayout(new FlowLayout());
-
-        List<JButton> gameButtons = designedButtons();
-        addButtonsToPanel(gameButtons);
-
         notGamePanel.add(startButton, BorderLayout.SOUTH);
         startButton.setSize(10,15);
-        startButton.addActionListener(this);;
+
+        addButtonsToPanel(gameButtons);
+        startButton.addActionListener(l -> {startGame();});;
 
         setSize(400,400);
         setVisible(true);
@@ -35,22 +32,21 @@ public class GameFrame extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void addButtonsToPanel(List<JButton> buttonList){
-        GamePanel.removeAll();
-        Collections.shuffle(buttonList);
-        for(JButton button:buttonList){
-            GamePanel.add(button);
-        }
-        GamePanel.revalidate();
-        GamePanel.repaint();
+    public void startGame(){
+        Game newGame = new Game(gamePanel, gameButtons);
     }
 
-    public void showAndShuffle(List<JButton> buttonList){
-        Collections.shuffle(buttonList);
-        for(JButton button:buttonList){
-            button.setVisible(true);
+    public void addButtonsToPanel(List<JButton> buttons){
+        gamePanel.removeAll();
+        Collections.shuffle(buttons);
+        for(JButton button:buttons){
+            button.setVisible(false);
+            gamePanel.add(button);
         }
+        gamePanel.revalidate();
+        gamePanel.repaint();
     }
+
 
     public List<JButton> designedButtons(){
         List<JButton> buttons = new ArrayList<>();
@@ -69,10 +65,4 @@ public class GameFrame extends JFrame implements ActionListener {
     }
 
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == startButton) {
-            showAndShuffle(designedButtons());
-        }
-    }
 }
