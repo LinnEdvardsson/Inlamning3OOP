@@ -1,6 +1,12 @@
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello friend, let's do this!");
+
+    public Main(){
+        GameFrame frame = new GameFrame();
     }
+
+    public static void main(String[] args) {
+        Main main = new Main();
+    }
+
 }
 
