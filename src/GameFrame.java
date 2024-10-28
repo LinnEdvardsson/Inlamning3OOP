@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.List;
 import java.util.concurrent.Flow;
 
-public class GameFrame extends JFrame implements ActionListener {
+public class GameFrame extends JFrame {
 
     JPanel GamePanel = new JPanel();
     JPanel notGamePanel = new JPanel();
@@ -27,7 +27,6 @@ public class GameFrame extends JFrame implements ActionListener {
 
         notGamePanel.add(startButton, BorderLayout.SOUTH);
         startButton.setSize(10,15);
-        startButton.addActionListener(this);;
 
         startButton.addActionListener(l -> {showAndShuffle(gameButtons);});
 
@@ -69,12 +68,5 @@ public class GameFrame extends JFrame implements ActionListener {
             buttons.add(button);
         }
         return buttons;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == startButton) {
-            showAndShuffle(designedButtons());
-        }
     }
 }
