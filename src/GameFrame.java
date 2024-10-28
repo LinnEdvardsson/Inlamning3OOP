@@ -29,6 +29,8 @@ public class GameFrame extends JFrame implements ActionListener {
         startButton.setSize(10,15);
         startButton.addActionListener(this);;
 
+        startButton.addActionListener(l -> {showAndShuffle(gameButtons);});
+
         setSize(400,400);
         setVisible(true);
         setLocationRelativeTo(null);
@@ -39,6 +41,7 @@ public class GameFrame extends JFrame implements ActionListener {
         GamePanel.removeAll();
         Collections.shuffle(buttonList);
         for(JButton button:buttonList){
+            button.setVisible(false);
             GamePanel.add(button);
         }
         GamePanel.revalidate();
@@ -67,7 +70,6 @@ public class GameFrame extends JFrame implements ActionListener {
         }
         return buttons;
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
