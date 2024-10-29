@@ -1,7 +1,7 @@
 public class Main {
 
     public Main(){
-        GameFrame frame = new GameFrame();
+        GameFrameTest frame = new GameFrameTest();
     }
 
     public static void main(String[] args) {
