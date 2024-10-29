@@ -18,6 +18,7 @@ public class GameFrameTest extends JFrame {
         this.add(GamePanel, BorderLayout.CENTER);
         this.add(notGamePanel, BorderLayout.AFTER_LAST_LINE);
         GamePanel.setLayout(new GridLayout(4,4, 5,5));
+        GamePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         notGamePanel.setLayout(new FlowLayout());
         notGamePanel.add(startButton, BorderLayout.SOUTH);
         startButton.setSize(10,15);
