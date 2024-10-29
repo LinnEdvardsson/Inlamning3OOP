@@ -12,6 +12,7 @@ public class GameFrame extends JFrame {
     JPanel GamePanel = new JPanel();
     JPanel notGamePanel = new JPanel();
     JButton startButton = new JButton("New game");
+    JButton tempButton = new JButton("Win");
 
     public GameFrame(){
         this.setLayout(new BorderLayout());
@@ -26,8 +27,11 @@ public class GameFrame extends JFrame {
 
         notGamePanel.add(startButton, BorderLayout.SOUTH);
         startButton.setSize(10,15);
+        notGamePanel.add(tempButton, BorderLayout.SOUTH);
+
 
         startButton.addActionListener(l -> {showAndShuffle(gameButtons);});
+        tempButton.addActionListener(a -> {WinFrame winFrame = new WinFrame(this, startButton);});
 
         setSize(400,400);
         setVisible(true);

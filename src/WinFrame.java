@@ -12,30 +12,32 @@ public class WinFrame {
     ImageIcon img = new ImageIcon("C:/Users/linnh/OneDrive/Bilder/randomBilder/congrats.jpg");
     JButton restartButton = new JButton("Play again");
     JButton exit = new JButton("Exit");
+    JButton getRestartButton;
 
-    public WinFrame(GameFrame gameFrame) {
+   /* public WinFrame(GameFrame gameFrame, JButton startButton) {
         this.gameFrame = gameFrame;
+        this.getRestartButton = startButton;
 
-    }
 
-    public WinFrame() {
+    }*/
 
+    public WinFrame(GameFrame gameFrame, JButton startButton) {
+        //wF.setUndecorated(true);
+        this.gameFrame = gameFrame;
+        this.getRestartButton = startButton;
         wF.add(winPanel);
         winPanel.setLayout(new BorderLayout());
         winPanel.add(soutPanel, BorderLayout.SOUTH);
         winPanel.add(label, BorderLayout.CENTER);
         label.setIcon(img);
         soutPanel.add(restartButton, BorderLayout.CENTER);
-        restartButton.addActionListener(e -> {
-            if (gameFrame.getStartButton()!= null) { //null???
-                gameFrame.getStartButton().doClick();
-            }
-        });
+        restartButton.addActionListener(e -> {getRestartButton.doClick();
+            wF.dispose();});
         soutPanel.add(exit, BorderLayout.CENTER);
         exit.addActionListener(a -> {wF.dispose();});
 
+
         wF.pack();
-        wF.setForeground(Color.PINK);
         wF.setVisible(true);
         wF.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         wF.setLocationRelativeTo(null);
