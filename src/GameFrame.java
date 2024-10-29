@@ -3,7 +3,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.RoundRectangle2D;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.Flow;
@@ -13,10 +12,6 @@ public class GameFrame extends JFrame {
     JPanel GamePanel = new JPanel();
     JPanel notGamePanel = new JPanel();
     JButton startButton = new JButton("New game");
-
-    public JButton getStartButton() {
-        return startButton;
-    }
 
     public GameFrame(){
         this.setLayout(new BorderLayout());
@@ -38,6 +33,10 @@ public class GameFrame extends JFrame {
         setVisible(true);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public JButton getStartButton() {
+        return startButton;
     }
 
     public void addButtonsToPanel(List<JButton> buttonList){
