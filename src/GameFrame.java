@@ -5,7 +5,6 @@ import java.util.List;
 
 public class GameFrame extends JFrame {
 
-
     //FÖRSTÖRDE DENNA KLASS SÅ DETTA FUNKAR EJ LÄNGRE.........
     JPanel gamePanel = new JPanel();
     JPanel notGamePanel = new JPanel();
@@ -63,6 +62,4 @@ public class GameFrame extends JFrame {
         }
         return buttons;
     }
-
-
 }
