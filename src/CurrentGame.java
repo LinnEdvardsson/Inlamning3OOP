@@ -25,23 +25,31 @@ public class CurrentGame implements ActionListener {
         }
 
 
-        fillArray();
+        fillArray(false);
         fillGameBoardPanel();
     }
 
     //Hjälp-metod för att fylla tvådimenstionella arrayen
-    public List<Integer> getNumbers() {
+    public List<Integer> getNumbers(boolean fastWin) {
         List<Integer> numbers = new ArrayList<>();
         for(int i = 0; i <= 15; i++){
             numbers.add(i);
         }
+
+        if (fastWin) {
+            int numbOne = numbers.get(0);
+            int numbTwo = numbers.get(1);
+            numbers.set(0, numbTwo);
+            numbers.set(1, numbOne);
+        }
+
         Collections.shuffle(numbers);
         return numbers;
     }
 
     //Fyller själva tvådimensionella arrayen
-    public void fillArray(){
-        List<Integer> numbers = getNumbers();
+    public void fillArray(boolean fastWin) {
+        List<Integer> numbers = getNumbers(fastWin);
         Random randomIndex =  new Random();
         for(int row = 0; row <gameBoard.length; row++){
             for(int col = 0; col <gameBoard[0].length; col++){

@@ -33,11 +33,11 @@ public class GameFrameTest extends JFrame {
     }
 
     public Color buttonColor(){
-        Color buttonColor = Color.decode("#FCB46D");
+        Color buttonColor = Color.decode("#FC9B6D");
         return buttonColor;
     }
     public Color buttonPressedColor(){
-        Color buttonPressedColor = Color.decode("#FCDEC1");
+        Color buttonPressedColor = Color.decode("#FFBC9B");
         return buttonPressedColor;
     }
 
