@@ -10,9 +10,21 @@ public class CurrentGame implements ActionListener {
     String[][] gameBoard = new String[4][4];
     JPanel buttonsPanel;
     JButton pressedButton;
+    List<JButton> buttons;
 
-    public CurrentGame(JPanel buttonsPanel) {
+    public CurrentGame(JPanel buttonsPanel, List<JButton> buttons) {
         this.buttonsPanel = buttonsPanel;
+        this.buttons = buttons;
+
+        //Claude hjälpte mig inse att jag behövde resetta actionlisteners från knapparna,
+        //eftersom vi faktiskt gör permanenta förändringar till knapparna här inne
+        for (JButton button : buttons) {
+            for (ActionListener al : button.getActionListeners()) {
+                button.removeActionListener(al);
+            }
+        }
+
+
         fillArray();
         fillGameBoardPanel();
     }
@@ -32,7 +44,6 @@ public class CurrentGame implements ActionListener {
         List<Integer> numbers = getNumbers();
         Random randomIndex =  new Random();
         for(int row = 0; row <gameBoard.length; row++){
-            //ändrade från i till 0 i gameBoard[0].length
             for(int col = 0; col <gameBoard[0].length; col++){
                 int index = randomIndex.nextInt(numbers.size());
                 gameBoard[row][col] = String.valueOf(numbers.get(index));
@@ -45,28 +56,22 @@ public class CurrentGame implements ActionListener {
     }
 
     //Fyller spelaplanen samt adderar actionlisteners till knappar
+    //denna ändrade jag nu med en buttonslista passerad in i klassen
     public void fillGameBoardPanel(){
         buttonsPanel.removeAll();
+        int buttonIndex = 0;
         for(int row = 0; row <gameBoard.length; row++){
             for(int col = 0; col <gameBoard[0].length; col++){
-                JButton button = new JButton(gameBoard[row][col]);
+                JButton button = buttons.get(buttonIndex);
+                button.setText(gameBoard[row][col]);
                 buttonsPanel.add(button);
+                setVisibility(button);
+                button.addActionListener(this);
+                buttonIndex++;
             }
         }
-        addActionListeners();
         buttonsPanel.revalidate();
         buttonsPanel.repaint();
-    }
-
-    //Lägger till actionlisteners till knapparna
-    public void addActionListeners() {
-        for (int i = 0; i < buttonsPanel.getComponentCount(); i++) {
-            Component component = buttonsPanel.getComponent(i);
-            if (component instanceof JButton) {
-                JButton button = (JButton) component;
-                button.addActionListener(this);
-            }
-        }
     }
 
     //Kollar om rutan till höger/vänster/norr/söder är tom
@@ -131,19 +136,23 @@ public class CurrentGame implements ActionListener {
     //Actionevent
     @Override
     public void actionPerformed(ActionEvent e) {
-        //tilldelar klassens pressedbutton den tryckta knappen
         pressedButton = (JButton) e.getSource();
-        //kollar om movet funkar
         boolean validMove = checkAdjacent(pressedButton);
 
-        //om det funkar, hämta index och placera ut move
         if (validMove){
-
             int[] pressed = indexPressedButton();
             int[] emptySpot = indexEmptyButton();
             makeMove(emptySpot, pressed);
-            //fyll spelplanen igen med nuvarande skick
             fillGameBoardPanel();
+        }
+    }
+
+    public void setVisibility(JButton button){
+        if(button.getText().equals(" ")){
+            button.setVisible(false);
+        }
+        else{
+            button.setVisible(true);
         }
     }
 }

@@ -13,7 +13,7 @@ public class GameFrame extends JFrame {
     JPanel notGamePanel = new JPanel();
     JButton startButton = new JButton("New game");
     JButton tempButton = new JButton("Win");
-
+git co
     public GameFrame(){
         this.setLayout(new BorderLayout());
 
