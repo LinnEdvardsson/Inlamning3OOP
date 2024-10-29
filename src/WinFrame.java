@@ -14,12 +14,6 @@ public class WinFrame {
     JButton exit = new JButton("Exit");
     JButton getRestartButton;
 
-   /* public WinFrame(GameFrame gameFrame, JButton startButton) {
-        this.gameFrame = gameFrame;
-        this.getRestartButton = startButton;
-
-
-    }*/
 
     public WinFrame(GameFrame gameFrame, JButton startButton) {
         //wF.setUndecorated(true);
