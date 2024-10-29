@@ -74,17 +74,6 @@ public class CurrentGame implements ActionListener {
         buttonsPanel.repaint();
     }
 
-    //Lägger till actionlisteners till knapparna
-//    public void addActionListeners() {
-//        for (int i = 0; i < buttonsPanel.getComponentCount(); i++) {
-//            Component component = buttonsPanel.getComponent(i);
-//            if (component instanceof JButton) {
-//                JButton button = (JButton) component;
-//                button.addActionListener(this);
-//            }
-//        }
-//    }
-
     //Kollar om rutan till höger/vänster/norr/söder är tom
     public boolean checkAdjacent(JButton pressedButton){
         for(int i = 0; i<gameBoard.length; i++){
