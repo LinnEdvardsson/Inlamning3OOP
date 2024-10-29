@@ -51,14 +51,14 @@ public class GameFrameTest extends JFrame {
             button.setPreferredSize(new Dimension(80, 80));
 
             button.addMouseListener(new MouseAdapter() {
-                                        @Override
-                                        public void mousePressed(MouseEvent e) {
-                                            button.setBackground(buttonPressedColor());
-                                        }
-                                        @Override
-                                        public void mouseReleased(MouseEvent e) {
-                                            button.setBackground(buttonColor());
-                                        }});
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    button.setBackground(buttonPressedColor());
+                }
+                @Override
+
+                public void mouseReleased(MouseEvent e) {button.setBackground(buttonColor());
+                }});
             buttonList.add(button);
         }
     }

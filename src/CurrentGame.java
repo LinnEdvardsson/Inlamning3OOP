@@ -163,4 +163,32 @@ public class CurrentGame implements ActionListener {
             button.setVisible(true);
         }
     }
+
+    public boolean checkWin (){
+        int expNumb = 1;
+
+        //går igenom hela brädet
+        for(int i = 0; i < gameBoard.length; i++){
+            for(int j = 0; j < gameBoard[i].length; j++){
+
+                //kollar om sista positionen på brädet är tom
+                if(i == gameBoard.length - 1 && j == gameBoard[i].length -1){
+                    return gameBoard[i][j].equals(" ");
+                }
+                if(!gameBoard[i][j].equals(String.valueOf(expNumb))){
+                    return false;
+                }
+                expNumb ++;
+            }
+        }
+        return true;
+    }
+
+    public void gameSet(){
+        if(checkWin()){
+            WinFrame winFrame = new WinFrame();
+        }
+    }
+
+
 }
