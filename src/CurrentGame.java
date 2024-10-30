@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.List;
 
@@ -119,6 +120,7 @@ public class CurrentGame implements ActionListener {
 
         gameBoard[pressedSpot[0]][pressedSpot[1]] = empty;
         gameBoard[emptySpot[0]][emptySpot[1]] = pressed;
+        checkWin();
 
     }
 
@@ -169,47 +171,6 @@ public class CurrentGame implements ActionListener {
         }
     }
 
-   /* public String[][] getGameBoard(){
-       int rows = gameBoard.length;
-       int col = gameBoard[0].length;
-       int[] tempArray = new int[rows * col];
-
-        int index = 0;
-       for(int i = 0; i < rows; i++){
-           for(int j = 0; j < col; j++){
-               tempArray[i++] = Integer.parseInt(gameBoard[i][j]);
-           }
-       }
-       return gameBoard;
-    }*/
-
-
-    public boolean checkWin (){
-        int expNumb = 1;
-
-        //går igenom hela brädet
-        for(int i = 0; i < gameBoard.length; i++){
-            for(int j = 0; j < gameBoard[i].length; j++){
-
-                //kollar om sista positionen på brädet är tom
-                if(i == gameBoard.length - 1 && j == gameBoard[i].length -1){
-                    return gameBoard[i][j].equals(" ");
-                }
-                if(!gameBoard[i][j].equals(String.valueOf(expNumb))){
-                    return false;
-                }
-                expNumb ++;
-            }
-        }
-        return true;
-
-    }
-
-    public void gameSet(){
-        if(checkWin()){
-            WinFrame winFrame = new WinFrame();
-        }
-    }
 
     public void fastWin(){
         String[][] getnumb = {
@@ -220,6 +181,25 @@ public class CurrentGame implements ActionListener {
         };
         gameBoard = getnumb;
         fillGameBoardPanel();
+
     }
 
+    public void checkWin() {
+        String expected = "123456789101112131415 ";
+        StringBuilder current = new StringBuilder();
+
+        for (String[] row : gameBoard) {
+            for (String index : row) {
+                current.append(index);
+            }
+        }
+        System.out.println("Current: " + current.toString());
+        System.out.println("Expecte: " + expected);
+        System.out.println("gameboard" + Arrays.deepToString(gameBoard));
+
+        if (current.toString().equals(expected)) {
+
+            WinFrame wF = new WinFrame();
+        }
+    }
 }
