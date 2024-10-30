@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.List;
+import java.util.Timer;
 
 public class CurrentGame implements ActionListener {
 
@@ -11,22 +12,40 @@ public class CurrentGame implements ActionListener {
     JPanel buttonsPanel;
     JButton pressedButton;
     List<JButton> buttons;
+    JLabel moveCounter;
+    int moves;
 
-    public CurrentGame(JPanel buttonsPanel, List<JButton> buttons) {
+    public CurrentGame(JPanel buttonsPanel, List<JButton> buttons, JLabel moveCounter) {
         this.buttonsPanel = buttonsPanel;
         this.buttons = buttons;
+        this.moveCounter = moveCounter;
 
-        //Claude hjälpte mig inse att jag behövde resetta actionlisteners från knapparna,
-        //eftersom vi faktiskt gör permanenta förändringar till knapparna här inne
+        resetGame();
+
+    }
+
+    public void resetGame(){
+        resetCounter();
+        resetActionListeners();
+        resetGameBoard();
+    }
+
+    public void resetCounter(){
+        moves = 0;
+        moveCounter.setText("0");
+    }
+
+    public void resetGameBoard(){
+        fillArray(false);
+        fillGameBoardPanel();
+    }
+
+    public void resetActionListeners(){
         for (JButton button : buttons) {
             for (ActionListener al : button.getActionListeners()) {
                 button.removeActionListener(al);
             }
         }
-
-
-        fillArray(false);
-        fillGameBoardPanel();
     }
 
     //Hjälp-metod för att fylla tvådimenstionella arrayen
@@ -115,7 +134,16 @@ public class CurrentGame implements ActionListener {
         gameBoard[pressedSpot[0]][pressedSpot[1]] = empty;
         gameBoard[emptySpot[0]][emptySpot[1]] = pressed;
 
+        updateCounterLabel();
+        moves++;
+
     }
+
+    public void updateCounterLabel(){
+        int currentMoves = Integer.parseInt(moveCounter.getText()) + 1;
+        moveCounter.setText(String.valueOf(currentMoves));
+    }
+
 
     //Ger index för tomma knappen
     public int[] indexEmptyButton(){

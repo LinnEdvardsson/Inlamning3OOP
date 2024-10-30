@@ -27,7 +27,8 @@ public class WinFrame {
         winPanel.add(label, BorderLayout.CENTER);
         label.setIcon(img);
         soutPanel.add(restartButton, BorderLayout.CENTER);
-        restartButton.addActionListener(e -> {getRestartButton.doClick();
+        restartButton.addActionListener(e -> {
+            getRestartButton.doClick();
             wF.dispose();});
         soutPanel.add(exit, BorderLayout.CENTER);
         exit.addActionListener(a -> {wF.dispose();});
