@@ -50,12 +50,10 @@ public class GameFrameTest extends JFrame {
     }
 
     public Color buttonColor(){
-        Color buttonColor = Color.decode("#FC9B6D");
-        return buttonColor;
+        return Color.decode("#FC9B6D");
     }
     public Color buttonPressedColor(){
-        Color buttonPressedColor = Color.decode("#FFBC9B");
-        return buttonPressedColor;
+        return Color.decode("#FFBC9B");
     }
 
     public Color buttonHoverColor() {
@@ -76,19 +74,22 @@ public class GameFrameTest extends JFrame {
             button.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
             button.setForeground(new Color(255, 255, 255));
             button.setPreferredSize(new Dimension(80, 80));
-
-            button.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mousePressed(MouseEvent e) {button.setBackground(buttonPressedColor());}
-                @Override
-                public void mouseReleased(MouseEvent e) {button.setBackground(buttonColor());}
-                @Override
-                public void mouseEntered(MouseEvent e) {button.setBackground(buttonHoverColor()); }
-                @Override
-                public void mouseExited(MouseEvent e) {button.setBackground(buttonColor()); }
-            });
+            assignMouseListener(button);
             buttonList.add(button);
         }
+    }
+
+    public void assignMouseListener(JButton button){
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {button.setBackground(buttonPressedColor());}
+            @Override
+            public void mouseReleased(MouseEvent e) {button.setBackground(buttonColor());}
+            @Override
+            public void mouseEntered(MouseEvent e) {button.setBackground(buttonHoverColor()); }
+            @Override
+            public void mouseExited(MouseEvent e) {button.setBackground(buttonColor()); }
+        });
     }
 
     public void setUpFrame(){
