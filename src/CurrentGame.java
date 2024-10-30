@@ -18,6 +18,7 @@ public class CurrentGame implements ActionListener {
         this.buttonsPanel = buttonsPanel;
         this.buttons = buttons;
         this.moveCounter = moveCounter;
+        resetGame();
         if (fastGame){
             fastWin();
         }
@@ -25,8 +26,6 @@ public class CurrentGame implements ActionListener {
             fillArray(false);
             fillGameBoardPanel();
         }
-
-        resetGame();
 
     }
 
@@ -210,7 +209,6 @@ public class CurrentGame implements ActionListener {
         };
         gameBoard = getnumb;
         fillGameBoardPanel();
-
     }
 
     public void checkWin() {
