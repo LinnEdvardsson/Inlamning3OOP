@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
@@ -12,7 +11,9 @@ public class CurrentGame implements ActionListener {
     JButton pressedButton;
     List<JButton> buttons;
 
-    public CurrentGame(JPanel buttonsPanel, List<JButton> buttons) {
+    public CurrentGame(){}
+
+    public CurrentGame(JPanel buttonsPanel, List<JButton> buttons, boolean fastGame) {
         this.buttonsPanel = buttonsPanel;
         this.buttons = buttons;
 
@@ -24,9 +25,13 @@ public class CurrentGame implements ActionListener {
             }
         }
 
-
-        fillArray(false);
-        fillGameBoardPanel();
+        if (fastGame){
+            fastWin();
+        }
+        else{
+            fillArray(false);
+            fillGameBoardPanel();
+        }
     }
 
     //Hjälp-metod för att fylla tvådimenstionella arrayen
@@ -164,6 +169,21 @@ public class CurrentGame implements ActionListener {
         }
     }
 
+   /* public String[][] getGameBoard(){
+       int rows = gameBoard.length;
+       int col = gameBoard[0].length;
+       int[] tempArray = new int[rows * col];
+
+        int index = 0;
+       for(int i = 0; i < rows; i++){
+           for(int j = 0; j < col; j++){
+               tempArray[i++] = Integer.parseInt(gameBoard[i][j]);
+           }
+       }
+       return gameBoard;
+    }*/
+
+
     public boolean checkWin (){
         int expNumb = 1;
 
@@ -182,6 +202,7 @@ public class CurrentGame implements ActionListener {
             }
         }
         return true;
+
     }
 
     public void gameSet(){
@@ -190,5 +211,15 @@ public class CurrentGame implements ActionListener {
         }
     }
 
+    public void fastWin(){
+        String[][] getnumb = {
+                {"1", "2", "3", "4"},
+                {"5", "6", "7", "8"},
+                {"9", "10", "11", "12"},
+                {"13", "14", " ", "15"}
+        };
+        gameBoard = getnumb;
+        fillGameBoardPanel();
+    }
 
 }

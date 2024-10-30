@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.http.WebSocket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ public class GameFrameTest extends JFrame {
     JPanel GamePanel = new JPanel();
     JPanel notGamePanel = new JPanel();
     JButton startButton = new JButton("New game");
+    JButton winButton = new JButton("Win game");
     List<JButton> buttonList = new ArrayList<>();
 
     public GameFrameTest(){
@@ -21,17 +23,23 @@ public class GameFrameTest extends JFrame {
         GamePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         notGamePanel.setLayout(new FlowLayout());
         notGamePanel.add(startButton, BorderLayout.SOUTH);
+        notGamePanel.add(winButton, BorderLayout.SOUTH);
         startButton.setSize(10,15);
 
         initializeButtons();
-        startButton.addActionListener(l -> { startGame(); });
+        //här testar jag. testar att om man trycker på winButton, startar version av spelet som anropar fastwinmetoden
+        startButton.addActionListener(l -> { CurrentGame game = new CurrentGame(GamePanel, buttonList, false); });
+        winButton.addActionListener(l -> { CurrentGame fastGame = new CurrentGame(GamePanel, buttonList, true);});
+
+        /*startButton.addActionListener(l -> { startGame();});
+        winButton.addActionListener(new Listener(winButton));*/
 
         setUpFrame();
     }
 
-    public void startGame(){
+    /*public void startGame(){
         CurrentGame newGame = new CurrentGame(GamePanel, buttonList);
-    }
+    }*/
 
     public Color buttonColor(){
         Color buttonColor = Color.decode("#FC9B6D");
