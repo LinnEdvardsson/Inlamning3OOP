@@ -9,7 +9,7 @@ public class WinFrame {
     JPanel winPanel = new JPanel();
     JPanel soutPanel = new JPanel();
     JLabel label = new JLabel();
-    ImageIcon img = new ImageIcon("C:/Users/linnh/OneDrive/Bilder/randomBilder/congrats.jpg");
+    ImageIcon img = new ImageIcon("src/congrats.jpg");
     JButton restartButton = new JButton("Play again");
     JButton exit = new JButton("Exit");
     JButton getRestartButton;
