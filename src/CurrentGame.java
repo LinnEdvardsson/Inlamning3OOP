@@ -200,6 +200,7 @@ public class CurrentGame implements ActionListener {
     }
 
 
+    //Metod för snabbvinst, flytta en bricka
     public void fastWin(){
         String[][] getnumb = {
                 {"1", "2", "3", "4"},

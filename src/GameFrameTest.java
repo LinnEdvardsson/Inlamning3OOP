@@ -47,8 +47,6 @@ public class GameFrameTest extends JFrame {
         startButton.addActionListener(l -> { CurrentGame game = new CurrentGame(GamePanel, buttonList, movesLabel,false); });
         winButton.addActionListener(l -> { CurrentGame fastGame = new CurrentGame(GamePanel, buttonList, movesLabel,true);});
 
-        /*startButton.addActionListener(l -> { startGame();});
-        winButton.addActionListener(new Listener(winButton));*/
 
         setUpFrame();
     }
