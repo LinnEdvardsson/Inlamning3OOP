@@ -9,15 +9,16 @@ public class GameFrameTest extends JFrame {
 
     JPanel GamePanel = new JPanel();
     JPanel notGamePanel = new JPanel();
+    JButton startButton = new JButton("New game");
+    JButton winButton = new JButton("Win game");
     JPanel counterPanel = new JPanel();
     JLabel counterLabel = new JLabel("MOVES:");
     JLabel movesLabel = new JLabel("0");
-    JButton startButton = new JButton("Start");
     List<JButton> buttonList = new ArrayList<>();
 
     public GameFrameTest(){
-
         this.setLayout(new BorderLayout());
+
         this.add(GamePanel, BorderLayout.CENTER);
         this.add(notGamePanel, BorderLayout.SOUTH);
         this.add(counterPanel, BorderLayout.NORTH);
@@ -36,17 +37,20 @@ public class GameFrameTest extends JFrame {
 
         notGamePanel.setLayout(new FlowLayout());
         notGamePanel.add(startButton, BorderLayout.SOUTH);
+        notGamePanel.add(winButton, BorderLayout.SOUTH);
         notGamePanel.setOpaque(false);
 
         startButton.setSize(10,15);
-        startButton.addActionListener(l -> { startGame(); });
+
         initializeButtons();
+        //här testar jag. testar att om man trycker på winButton, startar version av spelet som anropar fastwinmetoden
+        startButton.addActionListener(l -> { CurrentGame game = new CurrentGame(GamePanel, buttonList, movesLabel,false); });
+        winButton.addActionListener(l -> { CurrentGame fastGame = new CurrentGame(GamePanel, buttonList, movesLabel,true);});
+
+        /*startButton.addActionListener(l -> { startGame();});
+        winButton.addActionListener(new Listener(winButton));*/
 
         setUpFrame();
-    }
-
-    public void startGame(){
-        CurrentGame newGame = new CurrentGame(GamePanel, buttonList, movesLabel);
     }
 
     public Color buttonColor(){
@@ -71,7 +75,7 @@ public class GameFrameTest extends JFrame {
         for(int i = 0; i <= 16; i++){
             JButton button = new RoundedButton();
             button.setBackground(buttonColor());
-            button.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+            button.setFont(new Font("Courier New", Font.BOLD, 20));
             button.setForeground(new Color(255, 255, 255));
             button.setPreferredSize(new Dimension(80, 80));
             assignMouseListener(button);

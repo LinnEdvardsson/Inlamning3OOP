@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.List;
-import java.util.Timer;
 
 public class CurrentGame implements ActionListener {
 
@@ -15,10 +14,17 @@ public class CurrentGame implements ActionListener {
     JLabel moveCounter;
     int moves;
 
-    public CurrentGame(JPanel buttonsPanel, List<JButton> buttons, JLabel moveCounter) {
+    public CurrentGame(JPanel buttonsPanel, List<JButton> buttons, JLabel moveCounter, boolean fastGame) {
         this.buttonsPanel = buttonsPanel;
         this.buttons = buttons;
         this.moveCounter = moveCounter;
+        if (fastGame){
+            fastWin();
+        }
+        else{
+            fillArray(false);
+            fillGameBoardPanel();
+        }
 
         resetGame();
 
@@ -46,6 +52,7 @@ public class CurrentGame implements ActionListener {
                 button.removeActionListener(al);
             }
         }
+
     }
 
     //Hjälp-metod för att fylla tvådimenstionella arrayen
@@ -133,6 +140,7 @@ public class CurrentGame implements ActionListener {
 
         gameBoard[pressedSpot[0]][pressedSpot[1]] = empty;
         gameBoard[emptySpot[0]][emptySpot[1]] = pressed;
+        checkWin();
 
         updateCounterLabel();
         moves++;
@@ -192,29 +200,31 @@ public class CurrentGame implements ActionListener {
         }
     }
 
-    public boolean checkWin (){
-        int expNumb = 1;
 
-        //går igenom hela brädet
-        for(int i = 0; i < gameBoard.length; i++){
-            for(int j = 0; j < gameBoard[i].length; j++){
+    public void fastWin(){
+        String[][] getnumb = {
+                {"1", "2", "3", "4"},
+                {"5", "6", "7", "8"},
+                {"9", "10", "11", "12"},
+                {"13", "14", " ", "15"}
+        };
+        gameBoard = getnumb;
+        fillGameBoardPanel();
 
-                //kollar om sista positionen på brädet är tom
-                if(i == gameBoard.length - 1 && j == gameBoard[i].length -1){
-                    return gameBoard[i][j].equals(" ");
-                }
-                if(!gameBoard[i][j].equals(String.valueOf(expNumb))){
-                    return false;
-                }
-                expNumb ++;
-            }
-        }
-        return true;
     }
 
-    public void gameSet(){
-        if(checkWin()){
-            WinFrame winFrame = new WinFrame();
+    public void checkWin() {
+        String expected = "123456789101112131415 ";
+        StringBuilder current = new StringBuilder();
+
+        for (String[] row : gameBoard) {
+            for (String index : row) {
+                current.append(index);
+            }
+        }
+        if (current.toString().equals(expected)) {
+
+            WinFrame wF = new WinFrame();
         }
     }
 
