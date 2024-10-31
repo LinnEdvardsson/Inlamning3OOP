@@ -14,7 +14,6 @@ public class CurrentGame implements ActionListener {
     JButton pressedButton;
 
     JLabel moveCounter;
-    int moves;
 
     public CurrentGame(JPanel buttonsPanel, List<JButton> buttons, JLabel moveCounter, boolean fastGame) {
         this.buttonsPanel = buttonsPanel;
@@ -35,7 +34,6 @@ public class CurrentGame implements ActionListener {
     }
 
     public void resetCounter(){
-        moves = 0;
         moveCounter.setText("0");
     }
 
@@ -63,7 +61,7 @@ public class CurrentGame implements ActionListener {
         return numbers;
     }
 
-    //Fyller själva tvådimensionella arrayen
+    //Fyller själva tvådimensionella arrayen med siffror från getNumbers
     public void fillArray() {
         List<Integer> numbers = getNumbers();
         Random randomIndex =  new Random();
@@ -79,8 +77,7 @@ public class CurrentGame implements ActionListener {
         }
     }
 
-    //Fyller spelaplanen samt adderar actionlisteners till knappar
-    //denna ändrade jag nu med en buttonslista passerad in i klassen
+    //Fyller panelen med knappar utefter arrayer
     public void fillGameBoardPanel(){
         buttonsPanel.removeAll();
         int buttonIndex = 0;
@@ -125,18 +122,19 @@ public class CurrentGame implements ActionListener {
     //Placerar ut draget på planen, dvs byter plats på empty button med pressed button
     public void makeMove(int[] emptySpot, int[] pressedSpot){
 
+        //Hämtar först ut index för den tryckta och tomma knappen
         String pressed = gameBoard[pressedSpot[0]][pressedSpot[1]];
         String empty = gameBoard[emptySpot[0]][emptySpot[1]];
 
         gameBoard[pressedSpot[0]][pressedSpot[1]] = empty;
         gameBoard[emptySpot[0]][emptySpot[1]] = pressed;
-        checkWin();
 
-        updateCounterLabel();
-        moves++;
+        checkWin(); //Kollar om det är en vinst
 
+        updateCounterLabel(); //Uppdaterar med ett nytt drag
     }
 
+    //Uppdaterar texten på dragräknaren
     public void updateCounterLabel(){
         int currentMoves = Integer.parseInt(moveCounter.getText()) + 1;
         moveCounter.setText(String.valueOf(currentMoves));
@@ -147,7 +145,7 @@ public class CurrentGame implements ActionListener {
     public int[] indexEmptyButton(){
         for(int i = 0; i < gameBoard.length; i++){
             for(int j = 0; j < gameBoard[0].length; j++){
-                if(gameBoard[i][j].equals(" ")){
+                if(gameBoard[i][j].equals(" ")){ //Plockar ut index för den tomma platsen
                     return new int[]{i, j};
                 }
             }
@@ -159,7 +157,7 @@ public class CurrentGame implements ActionListener {
     public int[] indexPressedButton(){
         for(int row = 0; row <gameBoard.length; row++){
             for(int col = 0; col <gameBoard[0].length; col++){
-                if (gameBoard[row][col].equals(pressedButton.getText())){
+                if (gameBoard[row][col].equals(pressedButton.getText())){ //Tittar om denna plats i arrayn har samma text som platsen på den tryckta knappen
                     return new int[] {row, col};
                 }
             }
@@ -179,26 +177,28 @@ public class CurrentGame implements ActionListener {
         fillGameBoardPanel();
     }
 
+    //checkwin, om alla nummer ligger i ordning med tom bricka sist
     public void checkWin() {
         String expected = "123456789101112131415 ";
         StringBuilder current = new StringBuilder();
-
         for (String[] row : gameBoard) {
             for (String index : row) {
                 current.append(index);
             }
         }
+        //Jämför nuvarande spelplansläge med ett förväntat
         if (current.toString().equals(expected)) {
             try{
-                Thread.sleep(1000);
+                Thread.sleep(200);
             }
             catch (InterruptedException e){
                 e.printStackTrace();
             }
-            WinFrame wF = new WinFrame();
+            WinFrame wF = new WinFrame(); //Öppnar upp nytt fönster för vinst
         }
     }
 
+    //Bestämmer synlighet på knapparna
     public void setVisibility(JButton button){
         if(button.getText().equals(" ")){
             button.setVisible(false);
@@ -208,17 +208,19 @@ public class CurrentGame implements ActionListener {
         }
     }
 
-    //Actionevent
+    //Actionevent när man klickar på en spelbricka
     @Override
     public void actionPerformed(ActionEvent e) {
+
         pressedButton = (JButton) e.getSource();
         boolean validMove = checkAdjacent(pressedButton);
 
+        //Om draget är giltigt, byt plats
         if (validMove){
             int[] pressed = indexPressedButton();
             int[] emptySpot = indexEmptyButton();
             makeMove(emptySpot, pressed);
-            fillGameBoardPanel();
+            fillGameBoardPanel(); //Uppdatera spelplanen
         }
     }
 }
