@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class WinFrame extends JFrame{
 
@@ -9,8 +8,8 @@ public class WinFrame extends JFrame{
     JPanel soutPanel = new JPanel();
     JLabel label = new JLabel();
     ImageIcon img = new ImageIcon("src/congrats.jpg");
-    JButton restartButton = new JButton("Play again");
-    JButton exit = new JButton("Exit");
+    JButton restartButton = new RoundedButton();
+    JButton exit = new RoundedButton();
 
 
     public WinFrame() {
@@ -28,6 +27,16 @@ public class WinFrame extends JFrame{
         exit.addActionListener(a -> {this.dispose();});
 
         setUpWinFrame();
+        custumButton();
+    }
+
+    public void custumButton(){
+        exit.setText("Exit");
+        restartButton.setText("Restart");
+        exit.setBackground(new Color(250, 95, 94));
+        exit.setForeground(new Color(255, 255, 255));
+        restartButton.setForeground(new Color(255, 255, 255));
+        restartButton.setBackground(new Color(250, 95, 94));
     }
 
     public void setUpWinFrame(){
