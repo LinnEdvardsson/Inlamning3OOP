@@ -4,7 +4,7 @@ import java.awt.*;
 public class WinFrame extends JFrame{
 
     JPanel winPanel = new JPanel();
-    JPanel soutPanel = new JPanel();
+    JPanel optionPanel = new JPanel();
     JLabel label = new JLabel();
     ImageIcon img = new ImageIcon("src/congrats.jpg");
     JButton restartButton = new PuzzleButton("Play again", false);
@@ -15,14 +15,14 @@ public class WinFrame extends JFrame{
 
         this.add(winPanel);
         winPanel.setLayout(new BorderLayout());
-        winPanel.add(soutPanel, BorderLayout.SOUTH);
+        winPanel.add(optionPanel, BorderLayout.SOUTH);
         winPanel.add(label, BorderLayout.CENTER);
         label.setIcon(img);
-        soutPanel.add(restartButton, BorderLayout.CENTER);
+        optionPanel.add(restartButton, BorderLayout.CENTER);
 
         restartButton.addActionListener(e -> { GameFrame.startButton.doClick(); this.dispose(); });
 
-        soutPanel.add(exit, BorderLayout.CENTER);
+        optionPanel.add(exit, BorderLayout.CENTER);
         exit.addActionListener(a -> {this.dispose();});
 
         setUpWinFrame();
