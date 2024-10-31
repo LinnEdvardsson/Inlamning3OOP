@@ -1,10 +1,7 @@
 public class Main {
 
-    public Main(){
+    public static void main(String[] args) {
         GameFrame frame = new GameFrame();
     }
 
-    public static void main(String[] args) {
-        Main main = new Main();
-    }
 }
