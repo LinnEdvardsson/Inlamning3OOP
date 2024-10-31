@@ -15,7 +15,7 @@ public class CurrentGame implements ActionListener {
     JLabel moveCounter;
     int moves;
 
-    public CurrentGame(JPanel buttonsPanel, List<JButton> buttons, JLabel moveCounter, JButton startButton, boolean fastGame) {
+    public CurrentGame(JPanel buttonsPanel, List<JButton> buttons, JLabel moveCounter, boolean fastGame) {
         this.buttonsPanel = buttonsPanel;
         this.buttons = buttons;
         this.moveCounter = moveCounter;
@@ -211,7 +211,7 @@ public class CurrentGame implements ActionListener {
             }
         }
         if (current.toString().equals(expected)) {
-            WinFrame wF = new WinFrame(startButton);
+            WinFrame wF = new WinFrame();
         }
     }
 }

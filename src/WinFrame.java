@@ -12,11 +12,10 @@ public class WinFrame {
     ImageIcon img = new ImageIcon("src/congrats.jpg");
     JButton restartButton = new JButton("Play again");
     JButton exit = new JButton("Exit");
-    //JButton getRestartButton;
 
-    public WinFrame(JButton startButton) {
 
-        this.restartButton = startButton;
+    public WinFrame() {
+
         this.gameFrameTest = gameFrameTest;
         wF.add(winPanel);
         winPanel.setLayout(new BorderLayout());
@@ -25,7 +24,7 @@ public class WinFrame {
         label.setIcon(img);
         soutPanel.add(restartButton, BorderLayout.CENTER);
 
-        restartButton.addActionListener(e -> { startButton.doClick(); wF.dispose();});
+        restartButton.addActionListener(e -> { GameFrameTest.startButton.doClick(); wF.dispose(); });
 
         soutPanel.add(exit, BorderLayout.CENTER);
         exit.addActionListener(a -> {wF.dispose();});

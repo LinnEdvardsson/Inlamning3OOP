@@ -1,18 +1,16 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameFrameTest extends JFrame implements ActionListener {
+public class GameFrameTest extends JFrame {
 
     JPanel GamePanel = new JPanel();
     JPanel notGamePanel = new JPanel();
 
-    JButton startButton = new JButton("New game");
+    public static JButton startButton = new JButton("New game");
     JButton winButton = new JButton("Win game");
     JButton exitButton = new JButton("Exit");
 
@@ -50,8 +48,8 @@ public class GameFrameTest extends JFrame implements ActionListener {
 
         initializeButtons();
 
-        startButton.addActionListener(l -> { CurrentGame game = new CurrentGame(GamePanel, buttonList, movesLabel, startButton, false); });
-        winButton.addActionListener(l -> { CurrentGame fastGame = new CurrentGame(GamePanel, buttonList, movesLabel, startButton, true);});
+        startButton.addActionListener(l -> { CurrentGame game = new CurrentGame(GamePanel, buttonList, movesLabel, false); });
+        winButton.addActionListener(l -> { CurrentGame fastGame = new CurrentGame(GamePanel, buttonList, movesLabel, true);});
 
         setUpFrame();
     }
@@ -106,19 +104,4 @@ public class GameFrameTest extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void initializeStartButtons(){
-        startButton.addActionListener(l -> { CurrentGame game = new CurrentGame(GamePanel, buttonList, movesLabel, startButton, false); });
-        winButton.addActionListener(l -> { CurrentGame fastGame = new CurrentGame(GamePanel, buttonList, movesLabel, startButton, true);});
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == startButton){
-            CurrentGame game = new CurrentGame(GamePanel, buttonList, movesLabel, startButton, false);
-        }
-        else if (e.getSource() == winButton){
-            CurrentGame fastGame = new CurrentGame(GamePanel, buttonList, movesLabel, startButton, true);
-        }
-
-    }
 }
