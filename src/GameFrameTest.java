@@ -1,16 +1,21 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameFrameTest extends JFrame {
+public class GameFrameTest extends JFrame implements ActionListener {
 
     JPanel GamePanel = new JPanel();
     JPanel notGamePanel = new JPanel();
+
     JButton startButton = new JButton("New game");
     JButton winButton = new JButton("Win game");
+    JButton exitButton = new JButton("Exit");
+
     JPanel counterPanel = new JPanel();
     JLabel counterLabel = new JLabel("MOVES:");
     JLabel movesLabel = new JLabel("0");
@@ -36,6 +41,7 @@ public class GameFrameTest extends JFrame {
         GamePanel.setOpaque(false);
 
         notGamePanel.setLayout(new FlowLayout());
+        notGamePanel.add(exitButton, BorderLayout.SOUTH);
         notGamePanel.add(startButton, BorderLayout.SOUTH);
         notGamePanel.add(winButton, BorderLayout.SOUTH);
         notGamePanel.setOpaque(false);
@@ -43,10 +49,9 @@ public class GameFrameTest extends JFrame {
         startButton.setSize(10,15);
 
         initializeButtons();
-        //här testar jag. testar att om man trycker på winButton, startar version av spelet som anropar fastwinmetoden
-        startButton.addActionListener(l -> { CurrentGame game = new CurrentGame(GamePanel, buttonList, movesLabel,false); });
-        winButton.addActionListener(l -> { CurrentGame fastGame = new CurrentGame(GamePanel, buttonList, movesLabel,true);});
 
+        startButton.addActionListener(l -> { CurrentGame game = new CurrentGame(GamePanel, buttonList, movesLabel, startButton, false); });
+        winButton.addActionListener(l -> { CurrentGame fastGame = new CurrentGame(GamePanel, buttonList, movesLabel, startButton, true);});
 
         setUpFrame();
     }
@@ -101,4 +106,19 @@ public class GameFrameTest extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    public void initializeStartButtons(){
+        startButton.addActionListener(l -> { CurrentGame game = new CurrentGame(GamePanel, buttonList, movesLabel, startButton, false); });
+        winButton.addActionListener(l -> { CurrentGame fastGame = new CurrentGame(GamePanel, buttonList, movesLabel, startButton, true);});
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == startButton){
+            CurrentGame game = new CurrentGame(GamePanel, buttonList, movesLabel, startButton, false);
+        }
+        else if (e.getSource() == winButton){
+            CurrentGame fastGame = new CurrentGame(GamePanel, buttonList, movesLabel, startButton, true);
+        }
+
+    }
 }

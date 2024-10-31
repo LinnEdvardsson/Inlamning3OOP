@@ -3,8 +3,8 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class WinFrame {
-    private GameFrameTest gameFrameTest;
 
+    private GameFrameTest gameFrameTest;
     JFrame wF = new JFrame();
     JPanel winPanel = new JPanel();
     JPanel soutPanel = new JPanel();
@@ -12,23 +12,28 @@ public class WinFrame {
     ImageIcon img = new ImageIcon("src/congrats.jpg");
     JButton restartButton = new JButton("Play again");
     JButton exit = new JButton("Exit");
-    JButton getRestartButton;
+    //JButton getRestartButton;
 
-    public WinFrame(){
+    public WinFrame(JButton startButton) {
 
+        this.restartButton = startButton;
+        this.gameFrameTest = gameFrameTest;
         wF.add(winPanel);
         winPanel.setLayout(new BorderLayout());
         winPanel.add(soutPanel, BorderLayout.SOUTH);
         winPanel.add(label, BorderLayout.CENTER);
         label.setIcon(img);
         soutPanel.add(restartButton, BorderLayout.CENTER);
-        restartButton.addActionListener(e -> {
-            getRestartButton.doClick();
-            wF.dispose();});
+
+        restartButton.addActionListener(e -> { startButton.doClick(); wF.dispose();});
+
         soutPanel.add(exit, BorderLayout.CENTER);
         exit.addActionListener(a -> {wF.dispose();});
 
+        setUpWinFrame();
+    }
 
+    public void setUpWinFrame(){
         wF.pack();
         wF.setVisible(true);
         wF.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

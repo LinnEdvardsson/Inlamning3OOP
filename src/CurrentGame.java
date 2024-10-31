@@ -10,23 +10,20 @@ public class CurrentGame implements ActionListener {
     String[][] gameBoard = new String[4][4];
     JPanel buttonsPanel;
     JButton pressedButton;
+    JButton startButton;
     List<JButton> buttons;
     JLabel moveCounter;
     int moves;
 
-    public CurrentGame(JPanel buttonsPanel, List<JButton> buttons, JLabel moveCounter, boolean fastGame) {
+    public CurrentGame(JPanel buttonsPanel, List<JButton> buttons, JLabel moveCounter, JButton startButton, boolean fastGame) {
         this.buttonsPanel = buttonsPanel;
         this.buttons = buttons;
         this.moveCounter = moveCounter;
+        this.startButton = startButton;
         resetGame();
         if (fastGame){
             fastWin();
         }
-        else{
-            fillArray(false);
-            fillGameBoardPanel();
-        }
-
     }
 
     public void resetGame(){
@@ -41,7 +38,7 @@ public class CurrentGame implements ActionListener {
     }
 
     public void resetGameBoard(){
-        fillArray(false);
+        fillArray();
         fillGameBoardPanel();
     }
 
@@ -55,26 +52,18 @@ public class CurrentGame implements ActionListener {
     }
 
     //Hjälp-metod för att fylla tvådimenstionella arrayen
-    public List<Integer> getNumbers(boolean fastWin) {
+    public List<Integer> getNumbers() {
         List<Integer> numbers = new ArrayList<>();
         for(int i = 0; i <= 15; i++){
             numbers.add(i);
         }
-
-        if (fastWin) {
-            int numbOne = numbers.get(0);
-            int numbTwo = numbers.get(1);
-            numbers.set(0, numbTwo);
-            numbers.set(1, numbOne);
-        }
-
         Collections.shuffle(numbers);
         return numbers;
     }
 
     //Fyller själva tvådimensionella arrayen
-    public void fillArray(boolean fastWin) {
-        List<Integer> numbers = getNumbers(fastWin);
+    public void fillArray() {
+        List<Integer> numbers = getNumbers();
         Random randomIndex =  new Random();
         for(int row = 0; row <gameBoard.length; row++){
             for(int col = 0; col <gameBoard[0].length; col++){
@@ -222,10 +211,7 @@ public class CurrentGame implements ActionListener {
             }
         }
         if (current.toString().equals(expected)) {
-
-            WinFrame wF = new WinFrame();
+            WinFrame wF = new WinFrame(startButton);
         }
     }
-
-
 }
