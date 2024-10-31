@@ -8,10 +8,11 @@ import java.util.List;
 public class CurrentGame implements ActionListener {
 
     String[][] gameBoard = new String[4][4];
+    List<JButton> buttons;
+
     JPanel buttonsPanel;
     JButton pressedButton;
-    JButton startButton;
-    List<JButton> buttons;
+
     JLabel moveCounter;
     int moves;
 
@@ -19,8 +20,9 @@ public class CurrentGame implements ActionListener {
         this.buttonsPanel = buttonsPanel;
         this.buttons = buttons;
         this.moveCounter = moveCounter;
-        this.startButton = startButton;
+
         resetGame();
+
         if (fastGame){
             fastWin();
         }
@@ -165,30 +167,6 @@ public class CurrentGame implements ActionListener {
         return new int[] {-1, -1};
     }
 
-    //Actionevent
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        pressedButton = (JButton) e.getSource();
-        boolean validMove = checkAdjacent(pressedButton);
-
-        if (validMove){
-            int[] pressed = indexPressedButton();
-            int[] emptySpot = indexEmptyButton();
-            makeMove(emptySpot, pressed);
-            fillGameBoardPanel();
-        }
-    }
-
-    public void setVisibility(JButton button){
-        if(button.getText().equals(" ")){
-            button.setVisible(false);
-        }
-        else{
-            button.setVisible(true);
-        }
-    }
-
-
     //Metod för snabbvinst, flytta en bricka
     public void fastWin(){
         String[][] getnumb = {
@@ -211,7 +189,36 @@ public class CurrentGame implements ActionListener {
             }
         }
         if (current.toString().equals(expected)) {
+            try{
+                Thread.sleep(1000);
+            }
+            catch (InterruptedException e){
+                e.printStackTrace();
+            }
             WinFrame wF = new WinFrame();
+        }
+    }
+
+    public void setVisibility(JButton button){
+        if(button.getText().equals(" ")){
+            button.setVisible(false);
+        }
+        else{
+            button.setVisible(true);
+        }
+    }
+
+    //Actionevent
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        pressedButton = (JButton) e.getSource();
+        boolean validMove = checkAdjacent(pressedButton);
+
+        if (validMove){
+            int[] pressed = indexPressedButton();
+            int[] emptySpot = indexEmptyButton();
+            makeMove(emptySpot, pressed);
+            fillGameBoardPanel();
         }
     }
 }
