@@ -11,7 +11,6 @@ public class GradientPanel extends JPanel {
         int height = getHeight();
 
         Color color1 = new Color(243, 91, 91, 255);  // Soft coral
-        Color color3 = new Color(255, 123, 123, 255);  // Soft coral
         Color color2 = new Color(173, 235, 250);  // Soft turquoise
 
         // Create the gradient
