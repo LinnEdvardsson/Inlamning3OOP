@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
@@ -52,7 +51,7 @@ public class CurrentGame implements ActionListener {
     }
 
     //Hjälp-metod för att fylla tvådimenstionella arrayen
-    public List<Integer> getNumbers() {
+    public List<Integer> getShuffledNumbers() {
         List<Integer> numbers = new ArrayList<>();
         for(int i = 0; i <= 15; i++){
             numbers.add(i);
@@ -61,9 +60,9 @@ public class CurrentGame implements ActionListener {
         return numbers;
     }
 
-    //Fyller själva tvådimensionella arrayen med siffror från getNumbers
+    //Fyller själva tvådimensionella arrayen med siffror från getShuffledNumbers
     public void fillArray() {
-        List<Integer> numbers = getNumbers();
+        List<Integer> numbers = getShuffledNumbers();
         Random randomIndex =  new Random();
         for(int row = 0; row <gameBoard.length; row++){
             for(int col = 0; col <gameBoard[0].length; col++){
