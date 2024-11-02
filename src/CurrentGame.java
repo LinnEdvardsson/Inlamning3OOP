@@ -63,15 +63,14 @@ public class CurrentGame implements ActionListener {
     //Fyller själva tvådimensionella arrayen med siffror från getShuffledNumbers
     public void fillArray() {
         List<Integer> numbers = getShuffledNumbers();
-        Random randomIndex =  new Random();
-        for(int row = 0; row <gameBoard.length; row++){
-            for(int col = 0; col <gameBoard[0].length; col++){
-                int index = randomIndex.nextInt(numbers.size());
+        int index = 0;
+        for(int row = 0; row < gameBoard.length; row++) {
+            for(int col = 0; col < gameBoard[0].length; col++) {
                 gameBoard[row][col] = String.valueOf(numbers.get(index));
-                if (gameBoard[row][col].equals("0")){
+                if (gameBoard[row][col].equals("0")) {
                     gameBoard[row][col] = " ";
                 }
-                numbers.remove(index);
+                index++;
             }
         }
     }
