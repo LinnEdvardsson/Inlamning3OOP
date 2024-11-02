@@ -6,12 +6,12 @@ import java.util.List;
 public class GameFrame extends JFrame {
 
     public static JButton startButton = new PuzzleButton("Start game", false);
-    JButton winButton = new PuzzleButton("Quick win", false);
-    JButton exitButton = new PuzzleButton("Exit", false);
+    private JButton winButton = new PuzzleButton("Quick win", false);
+    private JButton exitButton = new PuzzleButton("Exit", false);
 
-    JLabel movesLabel = new JLabel("MOVES:");
-    JLabel movesDisplay = new JLabel("0");
-    List<JButton> buttonList = new ArrayList<>();
+    private JLabel movesLabel = new JLabel("MOVES:");
+    private JLabel movesDisplay = new JLabel("0");
+    private List<JButton> buttonList = new ArrayList<>();
 
     public GameFrame(){
 

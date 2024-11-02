@@ -3,12 +3,12 @@ import java.awt.*;
 
 public class WinFrame extends JFrame{
 
-    JPanel winPanel = new JPanel();
-    JPanel optionPanel = new JPanel();
-    JLabel label = new JLabel();
-    ImageIcon img = new ImageIcon("src/congrats.jpg");
-    JButton restartButton = new PuzzleButton("Play again", false);
-    JButton exit = new PuzzleButton("Exit", false);
+    private JPanel winPanel = new JPanel();
+    private JPanel optionPanel = new JPanel();
+    private JLabel label = new JLabel();
+    private ImageIcon img = new ImageIcon("src/congrats.jpg");
+    private JButton restartButton = new PuzzleButton("Play again", false);
+    private JButton exit = new PuzzleButton("Exit", false);
 
 
     public WinFrame() {

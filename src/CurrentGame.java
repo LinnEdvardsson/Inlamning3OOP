@@ -6,13 +6,13 @@ import java.util.List;
 
 public class CurrentGame implements ActionListener {
 
-    String[][] gameBoard = new String[4][4];
-    List<JButton> buttons;
+    private String[][] gameBoard = new String[4][4];
+    private List<JButton> buttons;
 
-    JPanel buttonsPanel;
-    JButton pressedButton;
+    private JPanel buttonsPanel;
+    private JButton pressedButton;
 
-    JLabel moveCounter;
+    private JLabel moveCounter;
 
     public CurrentGame(JPanel buttonsPanel, List<JButton> buttons, JLabel moveCounter, boolean fastGame) {
         this.buttonsPanel = buttonsPanel;
