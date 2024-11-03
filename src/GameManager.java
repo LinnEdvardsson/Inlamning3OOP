@@ -6,12 +6,12 @@ import java.util.List;
 public class GameManager implements ActionListener {
 
     private PuzzleGrid gameBoard;
-    private JLabel moveDisplay;
+    private JLabel movesDisplay;
     private int moves;
 
-    public GameManager(JPanel gamePanel, List<JButton> buttons, JLabel moveDisplay, boolean quickGame) {
+    public GameManager(JPanel gamePanel, List<JButton> buttons, JLabel movesDisplay, boolean quickGame) {
         this.gameBoard = new PuzzleGrid(buttons, gamePanel);
-        this.moveDisplay = moveDisplay;
+        this.movesDisplay = movesDisplay;
         this.moves = 0;
 
         //Om quickGame är true, sätts vi upp spelplanen fär en snabb vinst
@@ -35,7 +35,7 @@ public class GameManager implements ActionListener {
 
     //Uppdaterar komponenten för dragräknare med moves
     private void updateMoveDisplay() {
-        moveDisplay.setText(String.valueOf(moves));
+        movesDisplay.setText(String.valueOf(moves));
     }
 
     //Hanterar ett drag; tar in en knapp och tittar om den är bredvid den tomma platsen
@@ -44,7 +44,7 @@ public class GameManager implements ActionListener {
         int[] pressedSpot = gameBoard.indexPressedButton(pressedButton);
         int[] emptySpot = gameBoard.indexEmptySpot();
 
-        if (gameBoard.isAdjacentToEmptySpot(pressedSpot, emptySpot)) {
+        if (gameBoard.isAdjacent(pressedSpot, emptySpot)) {
             gameBoard.makeMove(emptySpot, pressedSpot);
             moves++;
             updateMoveDisplay();

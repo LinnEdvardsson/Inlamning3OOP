@@ -7,12 +7,12 @@ import java.util.List;
 public class PuzzleGrid {
 
     private String[][] grid;
-    private List<JButton> buttons;
+    private List<JButton> buttonsList;
     private JPanel gamePanel;
 
-    public PuzzleGrid(List<JButton> buttons, JPanel gamePanel) {
+    public PuzzleGrid(List<JButton> buttonsList, JPanel gamePanel) {
         grid = new String[4][4];
-        this.buttons = buttons;
+        this.buttonsList = buttonsList;
         this.gamePanel = gamePanel;
         fillArray();
     }
@@ -43,12 +43,12 @@ public class PuzzleGrid {
     }
 
     //Fyller panelen med knappar utefter arrayen och adderar actionlisteners
-    public void fillBoard(ActionListener moveListener) {
+    public void fillGameBoard(ActionListener moveListener) {
         int buttonIndex = 0;
 
         for(int row = 0; row < grid.length; row++){
             for(int col = 0; col < grid[0].length; col++){
-                JButton button = buttons.get(buttonIndex);
+                JButton button = buttonsList.get(buttonIndex);
                 button.setText(grid[row][col]);
                 gamePanel.add(button);
 
@@ -61,11 +61,10 @@ public class PuzzleGrid {
         }
     }
 
-
     //Resettar och uppdaterar spelplanen
     public void updateGameBoard(ActionListener moveListener){
         gamePanel.removeAll();
-        fillBoard(moveListener);
+        fillGameBoard(moveListener);
         gamePanel.revalidate();
         gamePanel.repaint();
     }
@@ -104,15 +103,18 @@ public class PuzzleGrid {
     }
 
     //Kollar om index för den pressade knappen är bredvid en tom plats
-    //Skillnaden ska vara 1 om platserna är bredvid varandra, 0 om de är samma plats, >1 om de inte är bredvid
-    public boolean isAdjacentToEmptySpot(int[] pressedSpot, int[] emptySpot) {
+    public boolean isAdjacent(int[] pressedSpot, int[] emptySpot) {
+        //Tar ut skillnaden mellan rad-nummer
         int rowDiff = Math.abs(pressedSpot[0] - emptySpot[0]);
+        //Skillnaden mellan kolumn-nummer
         int colDiff = Math.abs(pressedSpot[1] - emptySpot[1]);
+        //Om skillnaden är exakt 1, är platserna bredvid varandra
         return (rowDiff + colDiff) == 1;
     }
 
-    //Kollar om arrayn är sorterad
+    //Kollar om arrayen är sorterad
     public boolean checkWin() {
+        //Hur det ska se ut om spelet är vunnet
         String expected = "123456789101112131415 ";
         StringBuilder current = new StringBuilder();
         //Skapar upp en string av spelplanens nuvarande läge
@@ -145,7 +147,7 @@ public class PuzzleGrid {
     }
 
     //Sätter rätt synlighet på knapp
-    public void setVisibility(JButton button){
+    private void setVisibility(JButton button){
         if(button.getText().equals(" ")){
             button.setVisible(false);
         }
@@ -154,12 +156,7 @@ public class PuzzleGrid {
         }
     }
 
-
     public String[][] getGrid() {
         return grid;
-    }
-
-    public void setGrid(String[][] grid) {
-        this.grid = grid;
     }
 }

@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GradientPanel extends JPanel {
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -18,5 +17,4 @@ public class GradientPanel extends JPanel {
         g2d.setPaint(gradient);
         g2d.fillRect(0, 0, width, height);
     }
-
 }
