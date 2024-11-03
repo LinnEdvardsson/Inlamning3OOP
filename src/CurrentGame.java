@@ -220,8 +220,7 @@ public class CurrentGame implements ActionListener {
         int[] pressedSpot = indexPressedButton();
         int[] emptySpot = indexEmptyButton();
 
-        boolean validMove = isAdjacent(pressedSpot, emptySpot);
-        if (validMove){
+        if (isAdjacent(pressedSpot, emptySpot)){
             makeMove(emptySpot, pressedSpot);
             fillGameBoardPanel();
         }
