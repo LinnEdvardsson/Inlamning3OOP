@@ -5,7 +5,7 @@ import java.util.List;
 
 public class GameManager implements ActionListener {
 
-    PuzzleGrid gameBoard;
+    private PuzzleGrid gameBoard;
     private JLabel moveDisplay;
     private int moves;
 
@@ -14,13 +14,11 @@ public class GameManager implements ActionListener {
         this.moveDisplay = moveDisplay;
         this.moves = 0;
 
+        //Om quickGame är true, sätts vi upp spelplanen fär en snabb vinst
         if(quickGame) {
             gameBoard.setUpFastWin();
-            initializeGame();
         }
-        else{
-            initializeGame();
-        }
+        initializeGame();
     }
 
     //Resettar moves och uppdaterar spelplanen
@@ -40,6 +38,8 @@ public class GameManager implements ActionListener {
         moveDisplay.setText(String.valueOf(moves));
     }
 
+    //Hanterar ett drag; tar in en knapp och tittar om den är bredvid den tomma platsen
+    //Gör i så fall draget, uppdaterar spelplan, kollar om det är en vinst
     public void handleMove(JButton pressedButton) {
         int[] pressedSpot = gameBoard.indexPressedButton(pressedButton);
         int[] emptySpot = gameBoard.indexEmptySpot();
@@ -53,13 +53,14 @@ public class GameManager implements ActionListener {
         }
     }
 
+    //Anropar checkWin för spelplanen, visar vinst-fönster om det är en vinst
     private void checkForWin() {
         if (gameBoard.checkWin()) {
             showWinScreen();
         }
     }
 
-    //Öppnar vinstfönster
+    //Öppnar vinst-fönster med en liten delay för att visa sista draget
     private void showWinScreen() {
         try {
             Thread.sleep(200);
@@ -69,6 +70,7 @@ public class GameManager implements ActionListener {
         }
     }
 
+    //Klassens actionlistener, hämtar den tryckta knappen och anropar handleMove
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton pressedButton = (JButton) e.getSource();

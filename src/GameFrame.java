@@ -11,6 +11,7 @@ public class GameFrame extends JFrame {
 
     private JLabel movesLabel = new JLabel("MOVES:");
     private JLabel movesDisplay = new JLabel("0");
+
     private List<JButton> buttonList = new ArrayList<>();
 
     public GameFrame(){

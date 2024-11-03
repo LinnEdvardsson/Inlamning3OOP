@@ -27,6 +27,7 @@ public class PuzzleGrid {
         return numbers;
     }
 
+    //Fyller objektets array med listan med shufflade siffror
     public void fillArray() {
         List<Integer> numbers = getShuffledNumbers();
         int index = 0;
@@ -41,7 +42,7 @@ public class PuzzleGrid {
         }
     }
 
-    //Fyller panelen med knappar utefter PuzzleGrid-objektets array
+    //Fyller panelen med knappar utefter arrayen och adderar actionlisteners
     public void fillBoard(ActionListener moveListener) {
         int buttonIndex = 0;
 
@@ -103,6 +104,7 @@ public class PuzzleGrid {
     }
 
     //Kollar om index för den pressade knappen är bredvid en tom plats
+    //Skillnaden ska vara 1 om platserna är bredvid varandra, 0 om de är samma plats, >1 om de inte är bredvid
     public boolean isAdjacentToEmptySpot(int[] pressedSpot, int[] emptySpot) {
         int rowDiff = Math.abs(pressedSpot[0] - emptySpot[0]);
         int colDiff = Math.abs(pressedSpot[1] - emptySpot[1]);
@@ -113,11 +115,13 @@ public class PuzzleGrid {
     public boolean checkWin() {
         String expected = "123456789101112131415 ";
         StringBuilder current = new StringBuilder();
+        //Skapar upp en string av spelplanens nuvarande läge
         for (String[] row : grid) {
             for (String index : row) {
                 current.append(index);
             }
         }
+        //Returnerar true om de är samma
         return current.toString().equals(expected);
     }
 
@@ -129,6 +133,7 @@ public class PuzzleGrid {
                 {"9", "10", "11", "12"},
                 {"13", "14", " ", "15"}
         };
+        //Tilldelar en nästan sorterad array till spelplanen
         grid = closeToSorted;
     }
 
