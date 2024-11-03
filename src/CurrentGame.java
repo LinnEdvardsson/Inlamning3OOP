@@ -117,6 +117,12 @@ public class CurrentGame implements ActionListener {
         return false;
     }
 
+    public boolean isAdjacent(int[] pressedSpot, int[] emptySpot){
+        int rowDiff = pressedSpot[0] - emptySpot[0];
+        int colDiff = pressedSpot[1] - emptySpot[1];
+        return (rowDiff == 1 || rowDiff == -1) && colDiff == 0 || (colDiff == 1 || colDiff == -1) && rowDiff == 0;
+    }
+
     //Placerar ut draget på planen, dvs byter plats på empty button med pressed button
     public void makeMove(int[] emptySpot, int[] pressedSpot){
 
@@ -211,14 +217,13 @@ public class CurrentGame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         pressedButton = (JButton) e.getSource();
-        boolean validMove = checkAdjacent(pressedButton);
+        int[] pressedSpot = indexPressedButton();
+        int[] emptySpot = indexEmptyButton();
 
-        //Om draget är giltigt, byt plats
+        boolean validMove = isAdjacent(pressedSpot, emptySpot);
         if (validMove){
-            int[] pressed = indexPressedButton();
-            int[] emptySpot = indexEmptyButton();
-            makeMove(emptySpot, pressed);
-            fillGameBoardPanel(); //Uppdatera spelplanen
+            makeMove(emptySpot, pressedSpot);
+            fillGameBoardPanel();
         }
     }
 }
