@@ -27,8 +27,8 @@ public class GameFrame extends JFrame {
         designMovesDisplay();
         initializeGameButtons();
 
-        startButton.addActionListener(l -> { CurrentGame game = new CurrentGame(gamePanel, buttonList, movesDisplay, false); });
-        winButton.addActionListener(l -> { CurrentGame fastGame = new CurrentGame(gamePanel, buttonList, movesDisplay, true);});
+        startButton.addActionListener(l -> { GameManager game = new GameManager(gamePanel, buttonList, movesDisplay, false); });
+        winButton.addActionListener(l -> { GameManager fastGame = new GameManager(gamePanel, buttonList, movesDisplay, true);});
         exitButton.addActionListener(l -> {System.exit(0);});
 
         setUpFrame();
