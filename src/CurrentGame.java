@@ -47,11 +47,10 @@ public class CurrentGame implements ActionListener {
                 button.removeActionListener(al);
             }
         }
-
     }
 
     //Hjälp-metod för att fylla tvådimenstionella arrayen
-    public List<Integer> getShuffledNumbers() {
+    private List<Integer> getShuffledNumbers() {
         List<Integer> numbers = new ArrayList<>();
         for(int i = 0; i <= 15; i++){
             numbers.add(i);
@@ -61,7 +60,7 @@ public class CurrentGame implements ActionListener {
     }
 
     //Rotate flyttar första alla element ett steg till vänster som gör att 0 hamnar sist.
-    public List<Integer> getWinningNumbers() {
+    private List<Integer> getWinningNumbers() {
         List<Integer> numbers = new ArrayList<>();
         for(int i = 0; i <= 15; i++){
             numbers.add(i);
@@ -99,30 +98,6 @@ public class CurrentGame implements ActionListener {
         buttonsPanel.revalidate();
         buttonsPanel.repaint();
     }
-
-    //Kollar om rutan till höger/vänster/norr/söder är tom
-//    public boolean checkAdjacent(JButton pressedButton){
-//        for(int i = 0; i<gameBoard.length; i++){
-//            for(int j = 0; j<gameBoard[0].length; j++){
-//                if(pressedButton.getText().equals(gameBoard[i][j]) ){
-//
-//                    if (j < gameBoard[i].length - 1 && gameBoard[i][j + 1].equals(" ")) {
-//                        return true;
-//                    }
-//                    else if (j > 0 && gameBoard[i][j - 1].equals(" ")) {
-//                        return true;
-//                    }
-//                    else if (i > 0 && gameBoard[i - 1][j].equals(" ")) {
-//                        return true;
-//                    }
-//                    else if (i < gameBoard.length - 1 && gameBoard[i + 1][j].equals(" ")) {
-//                        return true;
-//                    }
-//                }
-//            }
-//        }
-//        return false;
-//    }
 
     public boolean isAdjacent(int[] pressedSpot, int[] emptySpot){
         int rowDiff = pressedSpot[0] - emptySpot[0];
